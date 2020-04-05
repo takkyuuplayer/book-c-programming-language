@@ -30,6 +30,10 @@ int main()
             op2 = pop();
             push(pop() - op2);
             break;
+        case '%':
+            op2 = pop();
+            push((int)pop() % (int)op2);
+            break;
         case '/':
             op2 = pop();
             if (op2 != 0.0)
@@ -93,11 +97,16 @@ int getop(char s[])
     {
     }
     s[1] = '\0';
-    if (!isdigit(c) && c != '.')
+
+    if (!isdigit(c) && c != '.' && c != '-')
     {
         return c;
     }
     i = 0;
+    if (c == '-')
+    {
+        s[++i] = c = getch();
+    }
     if (isdigit(c))
     {
         while (isdigit(s[++i] = c = getch()))
